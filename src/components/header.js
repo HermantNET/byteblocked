@@ -3,21 +3,20 @@ import Link from 'gatsby-link'
 import { Input } from 'antd'
 
 import logo from '../images/byteblock.svg'
-
 const Search = Input.Search
 
 const Header = ({ siteTitle }) => (
   <div
     style={{
       marginBottom: '1.45rem',
-      background: 'linear-gradient(to right, white 30%, black 30%)',
+      background: 'linear-gradient(to right, white 50%, black 50%)',
       boxShadow: '0 0 3px rgba(0,0,0,0.6)',
     }}
   >
     <div
       style={{
         margin: '0 auto',
-        maxWidth: 960,
+        maxWidth: 1080,
         padding: '1.45rem 1.0875rem',
         display: 'flex',
         alignItems: 'center',
@@ -45,6 +44,7 @@ const Header = ({ siteTitle }) => (
         <Search
           placeholder="search"
           onSearch={value =>
+            window &&
             window.location.replace(
               `${window.location.origin}/search?=${value}`
             )

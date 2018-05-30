@@ -5,6 +5,8 @@ import { Pagination } from 'antd'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/styles/hljs'
 
+import ContractCard from '../components/contract-card'
+
 class Browse extends React.Component {
   state = {
     contracts: [],
@@ -38,24 +40,13 @@ class Browse extends React.Component {
     const { offset, count, contracts } = this.state
     return (
       <div>
-        <h1>Recent Submissions</h1>
+        <h1>Browse</h1>
         <p>View all available contracts in reverse chronological order.</p>
 
         <div style={{ margin: '2em 0.3em' }}>
           <Row gutter={16}>
             {contracts.slice(offset - 1, offset + 7).map((c, i) => {
-              return (
-                <Col span={8}>
-                  <Link to={'/contract?=' + (i + offset - 1)}>
-                    <Card title={c.name}>
-                      <SyntaxHighlighter language="javascript" style={docco}>
-                        {c.contract.substring(0, 50) + '...'}
-                      </SyntaxHighlighter>
-                      <p>{c.description.substring(0, 50) + '...'}</p>
-                    </Card>
-                  </Link>
-                </Col>
-              )
+              return <ContractCard id={count - (offset + i + -1)} {...c} />
             })}
           </Row>
         </div>

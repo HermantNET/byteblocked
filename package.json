@@ -5,11 +5,13 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "antd": "^3.5.4",
+    "babylon": "^6.18.0",
     "gatsby": "^1.9.247",
     "gatsby-link": "^1.6.40",
     "gatsby-plugin-react-helmet": "^2.0.10",
     "nebpay.js": "^0.1.0",
     "nebulas": "^0.5.0",
+    "prettier": "^1.13.2",
     "react-helmet": "^5.2.0",
     "react-syntax-highlighter": "^7.0.4"
   },
@@ -23,7 +25,5 @@
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "prettier": "^1.12.0"
-  }
+  "devDependencies": {}
 }

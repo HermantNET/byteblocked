@@ -29,7 +29,7 @@ class Layout extends React.Component {
       })
       .then(function(tx) {
         var res = JSON.parse(tx.result)
-        window.localStorage.setItem('count', res)
+        window && window.localStorage.setItem('count', res)
 
         neb.api
           .call({
@@ -46,7 +46,7 @@ class Layout extends React.Component {
             },
           })
           .then(function(tx) {
-            window.localStorage.setItem('contracts', tx.result)
+            window && window.localStorage.setItem('contracts', tx.result)
           })
       })
   }
@@ -69,7 +69,7 @@ class Layout extends React.Component {
         <div
           style={{
             margin: '0 auto',
-            maxWidth: 960,
+            maxWidth: 1080,
             padding: '0px 1.0875rem 1.45rem',
             paddingTop: 0,
           }}

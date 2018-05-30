@@ -3,6 +3,22 @@ import { Card, Col, Row } from 'antd'
 import { Pagination } from 'antd'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/styles/hljs'
+import prettier from 'prettier/standalone'
+import plugins from 'prettier/parser-typescript'
+
+const parse = contract => {
+  try {
+    return prettier.format(
+      contract.length > 100 ? contract.substring(0, 100) + '...' : contract,
+      {
+        parser: 'typescript',
+        plugins: [plugins],
+      }
+    )
+  } catch (e) {
+    return contract.substring(0, 100)
+  }
+}
 
 class Contract extends React.Component {
   state = {
@@ -19,8 +35,8 @@ class Contract extends React.Component {
       setTimeout(this.getContracts, 2000)
     } else {
       this.setState({
-        contract: JSON.parse(localStorage.getItem('contracts'))[
-          +window.location.search.substring(2)
+        contract: JSON.parse(localStorage.getItem('contracts')).reverse()[
+          (window && +window.location.search.substring(2)) - 1
         ],
       })
     }
@@ -37,7 +53,7 @@ class Contract extends React.Component {
         <p>Contract Address: {contract.contractAddress || 'none'}</p>
         <p>Example: {contract.example || 'none'}</p>
         <SyntaxHighlighter language="javascript" style={docco}>
-          {contract.contract}
+          {parse(contract.contract)}
         </SyntaxHighlighter>
       </div>
     )

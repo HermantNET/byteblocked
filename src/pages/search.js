@@ -4,6 +4,8 @@ import { Pagination } from 'antd'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/styles/hljs'
 
+import ContractCard from '../components/contract-card'
+
 class Search extends React.Component {
   state = {
     contracts: [],
@@ -21,11 +23,16 @@ class Search extends React.Component {
       setTimeout(this.getContracts, 2000)
     } else {
       this.setState({
-        contracts: JSON.parse(localStorage.getItem('contracts')).filter(c =>
-          c.name
-            .toLowerCase()
-            .includes(`${window.location.search.substring(2).toLowerCase()}`)
-        ),
+        contracts: JSON.parse(localStorage.getItem('contracts'))
+          .reverse()
+          .map((c, i) => Object.assign(c, { id: i + 1 }))
+          .filter(c =>
+            c.name
+              .toLowerCase()
+              .includes(
+                `${window && window.location.search.substring(2).toLowerCase()}`
+              )
+          ),
         count: +localStorage.getItem('count'),
       })
     }
@@ -41,23 +48,17 @@ class Search extends React.Component {
     const { offset, count, contracts } = this.state
     return (
       <div>
-        <h1>Results for {window.location.search.substring(2)}</h1>
+        <h2>Results for {window && window.location.search.substring(2)}</h2>
         <p>View all available contracts, sorted by newest to oldest.</p>
 
         <div style={{ margin: '2em 0.3em' }}>
           <Row gutter={16}>
-            {contracts.slice(offset - 1, offset + 8).map(c => {
-              return (
-                <Col span={8}>
-                  <Card title={c.name}>
-                    <SyntaxHighlighter language="javascript" style={docco}>
-                      {c.contract.substring(0, 50) + '...'}
-                    </SyntaxHighlighter>
-                    <p>{c.description.substring(0, 50) + '...'}</p>
-                  </Card>
-                </Col>
-              )
-            })}
+            {contracts
+              .slice(offset - 1, offset + 8)
+              .reverse()
+              .map(c => {
+                return <ContractCard {...c} />
+              })}
           </Row>
         </div>
 

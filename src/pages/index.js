@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card, Col, Row } from 'antd'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { docco } from 'react-syntax-highlighter/styles/hljs'
+import Link from 'gatsby-link'
+import { Row } from 'antd'
+
+import ContractCard from '../components/contract-card'
 
 class IndexPage extends React.Component {
   state = {
@@ -44,19 +45,15 @@ class IndexPage extends React.Component {
             Recent submissions
           </h3>
           <Row gutter={16}>
-            {this.state.contracts.slice(0, 3).map(c => {
+            {this.state.contracts.slice(0, 3).map((c, i) => {
               return (
-                <Col span={8}>
-                  <Card title={c.name}>
-                    <SyntaxHighlighter language="javascript" style={docco}>
-                      {c.contract.substring(0, 50) + '...'}
-                    </SyntaxHighlighter>
-                    <p>{c.description.substring(0, 50) + '...'}</p>
-                  </Card>
-                </Col>
+                <ContractCard id={this.state.contracts.length - i} {...c} />
               )
             })}
           </Row>
+          <p>
+            <Link to="browse">View more</Link>
+          </p>
         </div>
       </div>
     )
