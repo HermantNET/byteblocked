@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"crypto/aes"
-	"crypto/tls"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -42,15 +41,10 @@ type result struct {
 	EstimatedGas string `json:"estimate_gas"`
 }
 
-var tr = &http.Transport{
-	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-}
-
 var client = &http.Client{
 	CheckRedirect: func(req *http.Request, via []*http.Request) error {
 		return http.ErrUseLastResponse
 	},
-	Transport: tr,
 }
 
 func accountInfo(a *core.Address) (parsed map[string]interface{}, err error) {
