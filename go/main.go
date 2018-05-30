@@ -72,5 +72,5 @@ func receive(rw http.ResponseWriter, req *http.Request) {
 func main() {
 	fmt.Println("Byteblocked v1")
 	http.HandleFunc("/", receive)
-	http.ListenAndServe(":6050", nil)
+	http.ListenAndServe(":2053", nil)
 }

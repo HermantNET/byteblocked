@@ -6,7 +6,7 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 
 import ContractCard from '../components/contract-card'
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 class Search extends React.Component {
   state = {
@@ -32,7 +32,8 @@ class Search extends React.Component {
             c.name
               .toLowerCase()
               .includes(
-                `${window && window.location.search.substring(2).toLowerCase()}`
+                `${windowCheck() &&
+                  window.location.search.substring(2).toLowerCase()}`
               )
           ),
         count: +localStorage.getItem('count'),
@@ -50,7 +51,9 @@ class Search extends React.Component {
     const { offset, count, contracts } = this.state
     return (
       <div>
-        <h2>Results for {window && window.location.search.substring(2)}</h2>
+        <h2>
+          Results for {windowCheck() && window.location.search.substring(2)}
+        </h2>
         <p>View all available contracts, sorted by newest to oldest.</p>
 
         <div style={{ margin: '2em 0.3em' }}>

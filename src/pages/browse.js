@@ -7,7 +7,7 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 
 import ContractCard from '../components/contract-card'
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 class Browse extends React.Component {
   state = {

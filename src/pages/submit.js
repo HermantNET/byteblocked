@@ -7,7 +7,7 @@ import plugins from 'prettier/parser-typescript'
 const FormItem = Form.Item
 const { TextArea } = Input
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 const formItemLayout = {
   labelCol: {
@@ -118,16 +118,19 @@ class Submit extends React.Component {
 
     if (!Object.keys(errors).some(e => errors[e])) {
       Object.keys(data).map(d => (data[d] = data[d].replace(/"/g, `\\\\\\"`)))
+      data['contract'] = data['contract'].replace(/\n+/g, ';')
 
-      fetch('http://165.227.234.211:6050/', {
+      fetch('https://mansuqq.com:2053/', {
         method: 'post',
         body: JSON.stringify(data),
         mode: 'no-cors',
       })
         .then(
           () =>
-            window &&
-            window.location.replace(window.location.origin + '?=submitted')
+            windowCheck() &&
+            window.location.replace(
+              `https://${window.location.host}?=submitted`
+            )
         )
         .catch(e => console.log(e))
     }

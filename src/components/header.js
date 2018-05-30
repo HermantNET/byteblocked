@@ -5,6 +5,8 @@ import { Input, Icon, Popover, Col, Row } from 'antd'
 import logo from '../images/byteblock.svg'
 const Search = Input.Search
 
+const windowCheck = () => typeof window !== 'undefined'
+
 const Header = ({ siteTitle }) => (
   <div
     style={{
@@ -37,18 +39,18 @@ const Header = ({ siteTitle }) => (
       </div>
 
       <div style={{ flex: 2, textAlign: 'right' }}>
-        <Link to="browse" style={{ color: 'white', marginRight: '0.7em' }}>
+        <Link to="/browse" style={{ color: 'white', marginRight: '0.7em' }}>
           Browse
         </Link>
-        <Link to="submit" style={{ color: 'white', marginRight: '1em' }}>
+        <Link to="/submit" style={{ color: 'white', marginRight: '1em' }}>
           Submit
         </Link>
         <Search
           placeholder="search"
           onSearch={value =>
-            window &&
+            windowCheck() &&
             window.location.replace(
-              `${window.location.origin}/search?=${value}`
+              `https://${window.location.host}/search?=${value}`
             )
           }
           style={{ maxWidth: '240px', width: '50%' }}

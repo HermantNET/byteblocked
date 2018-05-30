@@ -6,7 +6,7 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 import prettier from 'prettier/standalone'
 import plugins from 'prettier/parser-typescript'
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 const parse = contract => {
   try {
@@ -38,7 +38,7 @@ class Contract extends React.Component {
     } else {
       this.setState({
         contract: JSON.parse(localStorage.getItem('contracts')).reverse()[
-          (window && +window.location.search.substring(2)) - 1
+          (windowCheck() && +window.location.search.substring(2)) - 1
         ],
       })
     }

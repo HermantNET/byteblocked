@@ -11,7 +11,7 @@ import Nebulas from 'nebulas'
 const neb = new Nebulas.Neb()
 neb.setRequest(new Nebulas.HttpRequest('https://mainnet.nebulas.io'))
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 class Layout extends React.Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class Layout extends React.Component {
       })
       .then(function(tx) {
         var res = JSON.parse(tx.result)
-        window && window.localStorage.setItem('count', res)
+        windowCheck() && window.localStorage.setItem('count', res)
 
         neb.api
           .call({
@@ -48,7 +48,7 @@ class Layout extends React.Component {
             },
           })
           .then(function(tx) {
-            window && window.localStorage.setItem('contracts', tx.result)
+            windowCheck() && window.localStorage.setItem('contracts', tx.result)
           })
       })
   }

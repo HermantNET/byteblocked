@@ -4,7 +4,7 @@ import { Row, message } from 'antd'
 
 import ContractCard from '../components/contract-card'
 
-const window = typeof window !== 'undefined' && window
+const windowCheck = () => typeof window !== 'undefined'
 
 const success = () => {
   message.success(
@@ -19,7 +19,7 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     this.getContracts()
-    if (window && window.location.search.substring(2) === 'submitted') {
+    if (windowCheck() && window.location.search.substring(2) === 'submitted') {
       success()
     }
   }
@@ -63,7 +63,7 @@ class IndexPage extends React.Component {
             })}
           </Row>
           <p style={{ marginTop: '2em' }}>
-            <Link to="browse">View more</Link>
+            <Link to="/browse">View more</Link>
           </p>
         </div>
       </div>
