@@ -19,7 +19,7 @@ class Byte {
     return true
   }
 
-  newContract(name, author, description, contract, contractAddress, example) {
+  postContract(name, author, description, contract, contractAddress, example) {
     var contractCount = new BigNumber(this.contractCount).plus(1)
     var data = {
       name,
@@ -37,18 +37,18 @@ class Byte {
     return true
   }
 
-  count() {
+  getCount() {
     return this.contractCount
   }
 
-  contract(id) {
+  getContract(id) {
     return this.contracts.get(id)
   }
 
-  contracts(from, to) {
+  getContracts(from, to) {
     var payload = []
-    for (var i = +from; i < +to || i <= this.contractCount; i++) {
-      payload.push(this.contracts.get(id))
+    for (var i = +from; i > 0 && i >= +to && i <= +this.contractCount; i--) {
+      payload.push(this.contracts.get(i))
     }
 
     return payload
