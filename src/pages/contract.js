@@ -6,6 +6,8 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 import prettier from 'prettier/standalone'
 import plugins from 'prettier/parser-typescript'
 
+const window = typeof window !== 'undefined' && window
+
 const parse = contract => {
   try {
     return prettier.format(

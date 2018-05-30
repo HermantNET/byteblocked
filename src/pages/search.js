@@ -6,6 +6,8 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 
 import ContractCard from '../components/contract-card'
 
+const window = typeof window !== 'undefined' && window
+
 class Search extends React.Component {
   state = {
     contracts: [],

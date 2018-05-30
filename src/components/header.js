@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { Input } from 'antd'
+import { Input, Icon, Popover, Col, Row } from 'antd'
 
 import logo from '../images/byteblock.svg'
 const Search = Input.Search
@@ -24,17 +24,19 @@ const Header = ({ siteTitle }) => (
         background: 'linear-gradient(to right, white 130px, black 130px)',
       }}
     >
-      <Link to="/">
-        <img
-          src={logo}
-          style={{
-            margin: '0 1em 0 0',
-          }}
-          width="50"
-        />
-      </Link>
+      <div style={{ flex: 1 }}>
+        <Link to="/">
+          <img
+            src={logo}
+            style={{
+              margin: '0 1em 0 0',
+            }}
+            width="50"
+          />
+        </Link>
+      </div>
 
-      <div>
+      <div style={{ flex: 2, textAlign: 'right' }}>
         <Link to="browse" style={{ color: 'white', marginRight: '0.7em' }}>
           Browse
         </Link>
@@ -49,8 +51,15 @@ const Header = ({ siteTitle }) => (
               `${window.location.origin}/search?=${value}`
             )
           }
-          style={{ width: 200 }}
+          style={{ maxWidth: '240px', width: '50%' }}
         />
+        <Popover content="Having trouble? Contact @SpacemanThomas on Twitter.">
+          <Icon
+            style={{ marginLeft: '0.7em' }}
+            className="text-white"
+            type="question-circle"
+          />
+        </Popover>
       </div>
     </div>
   </div>

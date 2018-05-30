@@ -21,7 +21,7 @@ const parse = contract => {
 }
 
 const ContractCard = ({ id, name, contract, description }) => (
-  <Col span={8}>
+  <Col md={12} lg={8}>
     <Link to={'/contract?=' + id}>
       <Card title={name} style={{ margin: '0.3em' }}>
         <SyntaxHighlighter language="javascript" style={docco}>

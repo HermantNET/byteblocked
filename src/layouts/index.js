@@ -9,15 +9,17 @@ import './colors.css'
 
 import Nebulas from 'nebulas'
 const neb = new Nebulas.Neb()
-neb.setRequest(new Nebulas.HttpRequest('https://testnet.nebulas.io'))
+neb.setRequest(new Nebulas.HttpRequest('https://mainnet.nebulas.io'))
+
+const window = typeof window !== 'undefined' && window
 
 class Layout extends React.Component {
   componentDidMount() {
     neb.api
       .call({
         chainID: 1001,
-        from: 'n1mASdEokEtyLysQpVHAQh7zPnDBKtUUBEZ',
-        to: 'n1mASdEokEtyLysQpVHAQh7zPnDBKtUUBEZ',
+        from: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
+        to: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
         value: 0,
         nonce: 1000,
         gasPrice: 1000000,
@@ -34,8 +36,8 @@ class Layout extends React.Component {
         neb.api
           .call({
             chainID: 1001,
-            from: 'n1mASdEokEtyLysQpVHAQh7zPnDBKtUUBEZ',
-            to: 'n1mASdEokEtyLysQpVHAQh7zPnDBKtUUBEZ',
+            from: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
+            to: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
             value: 0,
             nonce: 1000,
             gasPrice: 1000000,

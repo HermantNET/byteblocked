@@ -15,8 +15,8 @@ import (
 	"./nebulas"
 )
 
-const mainnetURL = "https://testnet.nebulas.io"
-const chainID = 1001
+const mainnetURL = "https://mainnet.nebulas.io"
+const chainID = 1
 
 var errorNotInStorage = errors.New("account not in storage")
 var errorUnexpectedLength = errors.New("unexpected length")

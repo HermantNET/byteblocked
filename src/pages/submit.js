@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Form, Input, Col, Checkbox, Row } from 'antd'
 import { error } from 'util'
-import Axios from 'axios'
 import prettier from 'prettier/standalone'
 import plugins from 'prettier/parser-typescript'
 
 const FormItem = Form.Item
 const { TextArea } = Input
+
+const window = typeof window !== 'undefined' && window
 
 const formItemLayout = {
   labelCol: {
@@ -116,13 +117,19 @@ class Submit extends React.Component {
     })
 
     if (!Object.keys(errors).some(e => errors[e])) {
-      Axios.post('http://165.227.234.211:6050', data).then(res => {
-        if (res.status == 200) {
-          window && window.location.replace(`${window.location.origin}/`)
-        } else {
-          alert('error ' + res.status)
-        }
+      Object.keys(data).map(d => (data[d] = data[d].replace(/"/g, `\\\\\\"`)))
+
+      fetch('http://165.227.234.211:6050/', {
+        method: 'post',
+        body: JSON.stringify(data),
+        mode: 'no-cors',
       })
+        .then(
+          () =>
+            window &&
+            window.location.replace(window.location.origin + '?=submitted')
+        )
+        .catch(e => console.log(e))
     }
   }
 

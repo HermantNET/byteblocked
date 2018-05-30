@@ -1,8 +1,16 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { Row } from 'antd'
+import { Row, message } from 'antd'
 
 import ContractCard from '../components/contract-card'
+
+const window = typeof window !== 'undefined' && window
+
+const success = () => {
+  message.success(
+    'Your contract has been submitted. It may take a few minutes to show up here.'
+  )
+}
 
 class IndexPage extends React.Component {
   state = {
@@ -11,6 +19,9 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     this.getContracts()
+    if (window && window.location.search.substring(2) === 'submitted') {
+      success()
+    }
   }
 
   getContracts = () => {
@@ -51,7 +62,7 @@ class IndexPage extends React.Component {
               )
             })}
           </Row>
-          <p>
+          <p style={{ marginTop: '2em' }}>
             <Link to="browse">View more</Link>
           </p>
         </div>
