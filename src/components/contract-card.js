@@ -6,23 +6,26 @@ import { docco } from 'react-syntax-highlighter/styles/hljs'
 import prettier from 'prettier/standalone'
 import plugins from 'prettier/parser-typescript'
 
-window.addEventListener('message', function(e) {
-  if (typeof webExtensionWallet === 'undefined') {
-    message.error(
-      'Please install the Nubulas Web Extension Wallet, https://github.com/nebulasio/WebExtensionWallet'
-    )
-  }
-  try {
-    console.log('message received, msg.data: ' + JSON.stringify(e.data))
-    if (!!e.data.data.txhash) {
-      message.success(
-        'Transaction hash:\n' + JSON.stringify(e.data.data.txhash, null, '\t')
+const windowCheck = () => typeof window !== 'undefined'
+
+windowCheck() &&
+  window.addEventListener('message', function(e) {
+    if (typeof webExtensionWallet === 'undefined') {
+      message.error(
+        'Please install the Nubulas Web Extension Wallet, https://github.com/nebulasio/WebExtensionWallet'
       )
     }
-  } catch (e) {
-    this.console.error(e)
-  }
-})
+    try {
+      console.log('message received, msg.data: ' + JSON.stringify(e.data))
+      if (!!e.data.data.txhash) {
+        message.success(
+          'Transaction hash:\n' + JSON.stringify(e.data.data.txhash, null, '\t')
+        )
+      }
+    } catch (e) {
+      this.console.error(e)
+    }
+  })
 
 const parse = contract => {
   try {
