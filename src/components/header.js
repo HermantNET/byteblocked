@@ -50,7 +50,7 @@ const Header = ({ siteTitle }) => (
           onSearch={value =>
             windowCheck() &&
             window.location.replace(
-              `https://${window.location.host}/search?=${value}`
+              `https://${window.location.host}/search/?=${value}`
             )
           }
           style={{ maxWidth: '240px', width: '50%' }}

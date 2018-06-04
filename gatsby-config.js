@@ -6,6 +6,7 @@ module.exports = {
     keywords:
       'nebulas, blockchain, nas, dapp, distributed, application, app, nebulasio, nebulearn, smart, contract, smart contract',
     contractAddress: 'n1oR9TdPdW1wzjaoDQnhXXv686sUWuoNG6H',
+    contractAddressInteractions: 'n1si16M3TEaFEZNAj7MihY3cftniFsX6VF9',
   },
   plugins: ['gatsby-plugin-react-helmet'],
 }

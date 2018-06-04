@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -72,5 +73,5 @@ func receive(rw http.ResponseWriter, req *http.Request) {
 func main() {
 	fmt.Println("Byteblocked v1")
 	http.HandleFunc("/", receive)
-	http.ListenAndServeTLS(":2053", "cert.pem", "key.pem", nil)
+	log.Fatal(http.ListenAndServeTLS(":2053", "cert.pem", "key.pem", nil))
 }

@@ -17,7 +17,7 @@ class Layout extends React.Component {
   componentDidMount() {
     neb.api
       .call({
-        chainID: 1001,
+        chainID: 1,
         from: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
         to: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
         value: 0,
@@ -35,7 +35,7 @@ class Layout extends React.Component {
 
         neb.api
           .call({
-            chainID: 1001,
+            chainID: 1,
             from: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
             to: 'n1mnQ53itSzraLQHt8VnUA5zZCe4UyURuty',
             value: 0,
@@ -48,7 +48,33 @@ class Layout extends React.Component {
             },
           })
           .then(function(tx) {
-            windowCheck() && window.localStorage.setItem('contracts', tx.result)
+            windowCheck() &&
+              window.localStorage.setItem(
+                'contracts',
+                tx.result.replace(/,;/g, ',').replace(/\{;/g, '{')
+              )
+          })
+
+        neb.api
+          .call({
+            chainID: 1,
+            from: 'n1si16M3TEaFEZNAj7MihY3cftniFsX6VF9',
+            to: 'n1si16M3TEaFEZNAj7MihY3cftniFsX6VF9',
+            value: 0,
+            nonce: 1000,
+            gasPrice: 1000000,
+            gasLimit: 2000000,
+            contract: {
+              function: 'getInteractions',
+              args: `[${JSON.stringify(
+                Array.apply(undefined, Array(+res)).map((_, i) => i + 1)
+              )}]`,
+            },
+          })
+          .then(function(tx) {
+            console.log(tx.result)
+            windowCheck() &&
+              window.localStorage.setItem('interactions', tx.result)
           })
       })
   }

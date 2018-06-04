@@ -10,15 +10,12 @@ const windowCheck = () => typeof window !== 'undefined'
 
 const parse = contract => {
   try {
-    return prettier.format(
-      contract.length > 100 ? contract.substring(0, 100) + '...' : contract,
-      {
-        parser: 'typescript',
-        plugins: [plugins],
-      }
-    )
+    return prettier.format(contract, {
+      parser: 'typescript',
+      plugins: [plugins],
+    })
   } catch (e) {
-    return contract.substring(0, 100)
+    return contract
   }
 }
 
